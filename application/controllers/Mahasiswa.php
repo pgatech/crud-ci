@@ -18,6 +18,7 @@ class Mahasiswa extends CI_Controller{
             $data['mahasiswa'] = $this->Mahasiswa_model->cariDataMahasiswa();
         }
         $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
         $this->load->view('mahasiswa/index', $data);
         $this->load->view('templates/footer');
     }
@@ -32,6 +33,7 @@ class Mahasiswa extends CI_Controller{
         $this->form_validation->set_rules('tgl_lahir', 'Tanggal Lahir', 'required');
         if ( $this->form_validation->run() == FALSE ){
             $this->load->view('templates/header',$data);
+            $this->load->view('templates/navbar');
             $this->load->view('mahasiswa/tambah');
             $this->load->view('templates/footer');
         } else {
@@ -53,6 +55,7 @@ class Mahasiswa extends CI_Controller{
         $data['judul'] = 'Detail Data Mahasiswa';
         $data['mahasiswa'] = $this->Mahasiswa_model->getMahasiswaById($id);
         $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar');
         $this->load->view('mahasiswa/detail',$data);
         $this->load->view('templates/footer');
     }
@@ -69,6 +72,7 @@ class Mahasiswa extends CI_Controller{
         $this->form_validation->set_rules('tgl_lahir', 'Tanggal Lahir', 'required');
         if ( $this->form_validation->run() == FALSE ){
             $this->load->view('templates/header',$data);
+            $this->load->view('templates/navbar');
             $this->load->view('mahasiswa/update',$data);
             $this->load->view('templates/footer');
         } else {
