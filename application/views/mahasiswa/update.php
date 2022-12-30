@@ -37,7 +37,6 @@
                             <?php else : ?>
                                 <option value="<?= $jrs;?>"><?= $jrs;?></option>
                             <?php endif;?>
-
                         <?php endforeach;?>
                         </select>
                     </div>
