@@ -5,16 +5,7 @@
                 <div class="card" style="width: 32rem;">
                 <h5 class="card-header">Create Account</h5>
                     <div class="card-body">
-                        <!-- Flash Notifications -->
-                        <?php if ($this->session->flashdata('flash')) : ?>                   
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                Anda telah <strong>berhasil</strong> <?php echo $this->session->flashdata('flash'); ?> Silahkan untuk Login!
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        <?php endif;?>
-                    <form action="" method="POST">
+                    <form action="<?= base_url('auth/registration'); ?>" method="POST">
                             <div class="form-group">
                                 <label for="Name">Full Name</label>
                                 <input type="text" name="name" class="form-control" placeholder="Your Name" value="<?= set_value('name'); ?>">

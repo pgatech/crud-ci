@@ -2,17 +2,31 @@
     <div class="row">
         <div class="col">
             <div class="d-flex align-items-center justify-content-center" style="margin-top: 25vh;">
-                <div class="card" style="width: 22rem;">
+                <div class="card" style="width: 24rem;">
                 <h5 class="card-header">Login Account</h5>
                     <div class="card-body">
-                    <form>
+                    <!-- Start Flash Notifications -->
+                    <?php if ($this->session->flashdata('register')) : ?>                   
+                            <div class="alert alert-success" role="alert">
+                               <small> Anda telah <strong>berhasil</strong> <?php echo $this->session->flashdata('register'); ?></small>
+                            </div>
+                        <?php endif;?>
+                        
+                        <?php if($this->session->flashdata('msg')) : ?>
+                            <div class="alert alert-danger" role="alert">
+                                <small>Login <?php echo $this->session->flashdata('msg');?> Incorrect. Please try again.</small>
+                            </div>
+                        <?php endif;?>
+                    <!-- End Flash Notifications -->
+                    <form action="<?= base_url('auth');?>" method="POST">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                <input type="email" name="email" class="form-control" placeholder="Enter email" value="<?= set_value('email'); ?>">
+                                <small class="text-card text-danger"><?php echo form_error('email');?></small>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                             </div>
                             <button type="submit" class="btn btn-primary mt-3 float-right">Sign In</button>
                         </form>

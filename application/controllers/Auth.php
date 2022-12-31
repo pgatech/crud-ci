@@ -11,9 +11,36 @@ class Auth extends CI_Controller {
     }
 
     public function index(){
-        $data['judul'] = 'Login Sistem';
-        $this->load->view('templates/header', $data);
-        $this->load->view('auth/login');
+
+        $this->form_validation->set_rules('email','Email','required|trim|valid_email');
+        $this->form_validation->set_rules('password','Password','required|trim');
+        if ($this->form_validation->run() == false){
+            $data['judul'] = 'Login Sistem';
+            $this->load->view('templates/header', $data);
+            $this->load->view('auth/login');
+        }else{
+            // Validation Success
+            $this->_login();
+        }
+    }
+
+    private function _login(){
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+
+        $user = $this->db->get_where('user', ['email' => $email])->row_array();
+        
+        if ($user){
+            if(password_verify($password, $user['password'])){
+
+            }else{
+                $this->session->set_flashdata('msg','Email and Password');
+                redirect('auth');
+            }
+        }else{
+                $this->session->set_flashdata('msg','Email and Password');
+                redirect('auth');
+        }
     }
 
     public function registration(){
@@ -34,8 +61,8 @@ class Auth extends CI_Controller {
             $this->load->view('auth/registration');
         }else{
             $this->Auth_model->addNewAccount();
-            $this->session->set_flashdata('flash','Register!');
-            redirect('auth/registration');
+            $this->session->set_flashdata('register','Register!');
+            redirect('auth');
         }
     }
 }
